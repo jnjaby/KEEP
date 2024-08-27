@@ -1,0 +1,6 @@
+[submodule "gmflow"]
+	path = gmflow
+	url = https://github.com/haofeixu/gmflow
+[submodule "basicsr/archs/gmflow"]
+	path = basicsr/archs/gmflow
+	url = https://github.com/haofeixu/gmflow

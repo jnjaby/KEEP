@@ -78,7 +78,7 @@ You can also download our pretrained models from [Releases V0.1.0](https://githu
 
 
 ### Prepare Testing Data
-We provide several examples in `assets/examples` folder. If you would like to test your own face videos, place them in the same folder.
+We provide both synthetic (VFHQ) and real (collected) examples in `assets/examples` folder. If you would like to test your own face videos, place them in the same folder.
 You can also download the full synthetic and real test data from [[Google Drive](https://drive.google.com/drive/folders/16yqGKQnjCzrdVK_SQSzFhULEfhSxMUH_?usp=sharing)].
 
 
