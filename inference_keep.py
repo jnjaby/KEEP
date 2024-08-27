@@ -232,6 +232,11 @@ if __name__ == '__main__':
             face_helper.all_landmarks_5 = [avg_landmarks[i]]
             face_helper.align_warp_face()
         else:
+            img = cv2.resize(
+                img, (512, 512), interpolation=cv2.INTER_LINEAR)
+            face_helper.is_gray = is_gray(img, threshold=10)
+            if face_helper.is_gray:
+                print('Grayscale input: True')
             face_helper.cropped_faces = [img]
 
         cropped_face_t = img2tensor(
