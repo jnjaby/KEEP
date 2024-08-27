@@ -107,8 +107,8 @@ if __name__ == '__main__':
                         help='Tile size for background sampler. Default: 400')
     parser.add_argument('--suffix', type=str, default=None,
                         help='Suffix of the restored faces. Default: None')
-    parser.add_argument('--save_video_fps', type=float, default=25,
-                        help='Frame rate for saving video. Default: 25')
+    parser.add_argument('--save_video_fps', type=float, default=20,
+                        help='Frame rate for saving video. Default: 20')
 
     args = parser.parse_args()
     input_video = False
@@ -152,10 +152,10 @@ if __name__ == '__main__':
         print(f'Face detection model: {args.detection_model}')
     if bg_upsampler is not None:
         print(
-            f'Background upsampling: True, Face upsampling: {args.face_upsample}')
+            f'Background upsampling: True. Face upsampling: {args.face_upsample}')
     else:
         print(
-            f'Background upsampling: False, Face upsampling: {args.face_upsample}')
+            f'Background upsampling: False. Face upsampling: {args.face_upsample}')
 
     face_helper = FaceRestoreHelper(
         args.upscale,
@@ -196,9 +196,9 @@ if __name__ == '__main__':
         raise FileNotFoundError('No input image/video is found...\n'
                                 '\tNote that --input_path for video should end with .mp4|.mov|.avi')
 
-    # Smoothing aligned landmarks
-    print('Detecting keypoints and smooth alignment ...')
     if not args.has_aligned:
+        # Smoothing aligned landmarks
+        print('Detecting keypoints and smooth alignment ...')
         raw_landmarks = []
         for i, img in enumerate(input_img_list):
             # clean all the intermediate results to process the next image
@@ -226,11 +226,13 @@ if __name__ == '__main__':
     # Pack cropped faces.
     cropped_faces = []
     for i, img in enumerate(input_img_list):
-        # clean all the intermediate results to process the next image
-        face_helper.clean_all()
-        face_helper.read_image(img)
-        face_helper.all_landmarks_5 = [avg_landmarks[i]]
-        face_helper.align_warp_face()
+        if not args.has_aligned:
+            face_helper.clean_all()
+            face_helper.read_image(img)
+            face_helper.all_landmarks_5 = [avg_landmarks[i]]
+            face_helper.align_warp_face()
+        else:
+            face_helper.cropped_faces = [img]
 
         cropped_face_t = img2tensor(
             face_helper.cropped_faces[0] / 255., bgr2rgb=True, float32=True)
@@ -326,8 +328,13 @@ if __name__ == '__main__':
         print('Saving video ...')
         # load images
         video_frames = []
-        img_list = sorted(glob.glob(os.path.join(
-            result_root, 'final_results', '*.[jp][pn]g')))
+        if not args.has_aligned:
+            img_list = sorted(glob.glob(os.path.join(
+                result_root, 'final_results', '*.[jp][pn]g')))
+        else:
+            img_list = sorted(glob.glob(os.path.join(
+                result_root, 'restored_faces', '*.[jp][pn]g')))
+
         for img_path in img_list:
             img = cv2.imread(img_path)
             video_frames.append(img)
