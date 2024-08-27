@@ -90,7 +90,7 @@ You can also download the full synthetic and real test data from [[Google Drive]
 🧑🏻 Video Face Restoration for synthetic data (cropped and aligned face)
 ```
 # For cropped and aligned faces
-python inference_keep.py -i=./assets/examples/synthetic_1.mp4 -o=results/ --save_video -s=1
+python inference_keep.py -i=./assets/examples/synthetic_1.mp4 -o=results/ --has_aligned --save_video -s=1
 ```
 
 🎬 Video Face Restoration for real data (in the wild)
