@@ -55,8 +55,8 @@
 - CUDA >= 10.1
 - Other required packages in `requirements.txt`
 ```
-# git clone this repository
-git clone https://github.com/jnjaby/KEEP
+# git clone this repository. Don't forget to add --recursive!!
+git clone --recursive https://github.com/jnjaby/KEEP
 cd KEEP
 
 # create new anaconda env
