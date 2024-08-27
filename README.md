@@ -84,9 +84,7 @@ You can also download the full synthetic and real test data from [[Google Drive]
 
 
 ### Inference
-**[Note]** If you want to compare KEEP in your paper, please make sure the face alignment is consistent and run the following command with `--has_aligned` to indicate faces are already cropped and aligned.
-
-Fidelity weight *w* lays in [0, 1]. Generally, smaller *w* tends to produce a higher-quality result, while larger *w* yields a higher-fidelity result. The results will be saved in the `results` folder.
+**[Note]** If you want to compare KEEP in your paper, please make sure the face alignment is consistent and run the following command with `--has_aligned` to indicate faces are already cropped and aligned. The results will be saved in the `results` folder.
 
 
 🧑🏻 Video Face Restoration for synthetic data (cropped and aligned face)
