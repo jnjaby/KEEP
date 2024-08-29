@@ -59,6 +59,12 @@
 git clone --recursive https://github.com/jnjaby/KEEP
 cd KEEP
 
+# alternatively
+git clone https://github.com/jnjaby/KEEP
+cd KEEP
+git submodule init
+git submodule update
+
 # create new anaconda env
 conda create -n keep python=3.8 -y
 conda activate keep
