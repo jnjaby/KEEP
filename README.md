@@ -66,8 +66,14 @@ conda activate keep
 # install python dependencies
 pip3 install -r requirements.txt
 python basicsr/setup.py develop
-conda install -c conda-forge dlib (only for face detection or cropping with dlib)
+conda install -c conda-forge dlib # only for face detection or cropping with dlib
 conda install -c conda-forge ffmpeg
+```
+
+[Optional] If you forget to clone the repo with `--recursive`, you can update the submodule by 
+```
+git submodule init
+git submodule update
 ```
 
 ## Quick Inference

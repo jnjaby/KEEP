@@ -17,3 +17,6 @@ lpips
 gdown # supports downloading the large file from Google Drive
 diffusers==0.11.0
 einops
+ffmpeg-python
+av
+cupy==10.4.0
