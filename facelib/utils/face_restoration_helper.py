@@ -156,11 +156,21 @@ class FaceRestoreHelper(object):
         self.is_gray = is_gray(img, threshold=10)
         if self.is_gray:
             print('Grayscale input: True')
-
+        
+        # Modify resize method to handle the case that output size is odd number
         if min(self.input_img.shape[:2]) < 512:
-            f = 512.0/min(self.input_img.shape[:2])
+            f = 512.0 / min(self.input_img.shape[:2])
+            new_width = int(self.input_img.shape[1] * f)
+            new_height = int(self.input_img.shape[0] * f)
+
+            # Make width and height even
+            new_width = new_width + 1 if new_width % 2 != 0 else new_width
+            new_height = new_height + 1 if new_height % 2 != 0 else new_height
+
+            # Resize with the adjusted width and height
             self.input_img = cv2.resize(
-                self.input_img, (0, 0), fx=f, fy=f, interpolation=cv2.INTER_LINEAR)
+                self.input_img, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
+        
 
     def init_dlib(self, detection_path, landmark5_path):
         """Initialize the dlib detectors and predictors."""
