@@ -21,5 +21,6 @@ huggingface_hub==0.25.1
 pydantic==2.10.6
 ffmpeg-python==0.2.0
 av
+runpod # Added runpod
 # cmake # for dlib
 # dlib
